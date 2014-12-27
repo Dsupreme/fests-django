@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+
+<html>
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <script src="{% static "polymer/bower_components/webcomponentsjs/webcomponents.min.js" %}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+
+    <!--IMPORTS-->
+    <link rel="import" 
+          href="{% static "polymer/bower_components/core-ajax/core-ajax.html" %}">
+    <link rel="import"
+          href="{% static "polymer/bower_components/core-header-panel/core-header-panel.html" %}">
+    <link rel="import"
+          href="{% static "polymer/bower_components/core-toolbar/core-toolbar.html" %}">
+    <link rel="import"
+          href="{% static "polymer/bower_components/paper-tabs/paper-tabs.html" %}">
+    <link rel="import" 
+          href="{% static "polymer/bower_components/paper-icon-button/paper-icon-button.html" %}">
+    <link rel="import" 
+          href="{% static "polymer/bower_components/paper-progress/paper-progress.html" %}">
+    <link rel="import"
+          href="{% static "polymer/bower_components/core-drawer-panel/core-drawer-panel.html" %}">
+    <link rel="import"
+          href="{% static "polymer/bower_components/core-menu/core-menu.html" %}">
+    <link rel="import"
+          href="{% static "polymer/bower_components/core-item/core-item.html" %}">
+
+    <!--CSS-->
+    <link rel="stylesheet" href="{% static "polymer/css/index.css" %}"> 
+    
+  </head>
+    <!-- use fullbleed attribute to specify the body should fill the viewport -->
+  <body fullbleed vertical layout unresolved>
+
+    <core-drawer-panel id="drawer-panel">
+      <core-header-panel drawer mode="waterfall">
+        <core-toolbar>Menu
+        </core-toolbar>
+        <core-menu>
+          <core-item label="One"></core-item>
+          <core-item label="Two"></core-item>
+        </core-menu>
+      </core-header-panel>
+      <core-header-panel mode="waterfall-tall" main>
+        <core-toolbar id="mainheader" class="medium-tall">
+          <paper-icon-button id="navicon" icon="menu"></paper-icon-button>
+          <div id="name">Fests</div>
+          <div class="bottom fit">
+          <paper-tabs class="bottom fit" id="toolbar-tabs" selected="0">
+            <paper-tab>ONE</paper-tab>
+            <paper-tab>TWO</paper-tab>
+            <paper-tab>THREE</paper-tab>
+          </paper-tabs>
+          </div>
+          <span flex></span>
+          <paper-icon-button id="searchbutton" icon="search"></paper-icon-button>
+        </core-toolbar>
+        <div class="content">
+          <p>
+            <ul>
+              {% if user and not user.is_anonymous %}
+                <li>
+                  <a>Hello {{ user.get_full_name|default:user.username }}!</a>
+                </li>
+                <li>
+                  <a href="{% url 'auth:logout' %}?next={{ request.path }}">Logout</a>
+                </li>
+              {% else %}
+                <li>
+                  <a href="{% url 'social:begin' 'facebook' %}?next={{ request.path }}">Login with Facebook</a>
+                </li>
+                <li>
+                  <a href="{% url 'social:begin' 'google-oauth2' %}?next={{ request.path }}">Login with Google</a>
+                </li>
+                <li>
+                  <a href="{% url 'social:begin' 'twitter' %}?next={{ request.path }}">Login with Twitter</a>
+                </li>
+              {% endif %}
+             </ul>
+          </p>
+          <p>Sample content.</p>
+          <p>Sample content.</p>
+          <p>Sample content.</p>
+          <p>Sample content.</p>
+          <p>Sample content.</p>
+          <p>Sample content.</p>
+          <p>Sample content.</p>
+          <p>Sample content.</p>
+          <p>Sample content.</p>
+          <p>Sample content.</p>
+          <p>Sample content.</p>
+          <p>Sample content.</p>
+        </div>
+      </core-header-panel>   
+    </core-drawer-panel>
+    <script src="js/index.js"></script>
+
+  </body>
+  <!--<body>
+    <!-- <core-header-panel> ->
+      <core-toolbar>
+        <div>Fests.in</div>
+      </core-toolbar>
+    <!-- main page content will go here -->
+    <!-- ></core-header-panel>
+    <!-- 3. Declare the element. Configure using its attributes.
+    Replace '//example.com/json' with valid json file ->
+    <core-ajax url="//example.com/json"
+               handleAs="json"></core-ajax>
+
+    <script>
+      // Wait for 'polymer-ready'. Ensures the element is upgraded.
+      window.addEventListener('polymer-ready', function(e) {
+        var ajax = document.querySelector('core-ajax');
+
+        // Respond to events it fires.
+        ajax.addEventListener('core-response', function(e) {
+          console.log(this.response);
+        });
+
+        ajax.go(); // Call its API methods.
+      });
+    </script>
+  </body>-->
+</html>

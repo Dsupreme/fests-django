@@ -1,0 +1,31 @@
+core-toolbar {
+	background: #FF8341;
+	color: #FFFFFF;	
+}
+
+
+core-header-panel {
+ 	background: white;
+ 	margin-bottom: 0px;
+ }
+core-header-panel #name {
+ 	font-variant: small-caps;
+ 	font-size: 50px;
+ }
+
+ #name {
+ 	padding-right: 2em;
+ }
+
+p {
+  	margin: 20px;
+  	padding: 80px 20px;
+  	border-radius: 20px;
+  	background-color: #eee;
+}
+
+/* drawer is always visible on a wide screen
+   so menu button isn't required */
+core-drawer-panel:not([narrow]) #navicon {
+  display: none;
+}
